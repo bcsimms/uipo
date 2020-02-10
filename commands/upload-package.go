@@ -11,8 +11,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/ekaju-of-co/uipo/config"
-	"github.com/ekaju-of-co/uipo/util"
+	"github.com/bcsimms/uipo/config"
+	"github.com/bcsimms/uipo/util"
 )
 
 // CmdUploadPackage represents the flags this command support

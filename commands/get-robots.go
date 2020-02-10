@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/ekaju-of-co/uipo/config"
+	"github.com/bcsimms/uipo/config"
 )
 
 // CmdRobots represents the flags supported by this command

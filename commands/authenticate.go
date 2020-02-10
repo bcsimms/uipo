@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ekaju-of-co/uipo/config"
-	"github.com/ekaju-of-co/uipo/util"
+	"github.com/bcsimms/uipo/config"
+	"github.com/bcsimms/uipo/util"
 )
 
 // CmdAuthenticate is the struct that represents the command line options for the "authenticate" command
