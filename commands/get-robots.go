@@ -76,6 +76,9 @@ func (cmd *CmdRobots) Execute(args []string) error {
 		return err
 	}
 
+	//fmt.Println(resp.Header)
+	cmd.Config.SetAPIVersion(resp.Header.Get("Api-Supported-Versions"))
+
 	body, readErr := ioutil.ReadAll(resp.Body)
 	if readErr != nil {
 		return readErr

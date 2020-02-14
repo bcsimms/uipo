@@ -22,9 +22,9 @@ type CmdAddQueueItem struct {
 	QueueName          string `short:"q" long:"queue" required:"true" description:"The name of the queue to which we will add a item"`
 	Priority           string `short:"p" long:"priority" default:"Normal" choice:"Low" choice:"Normal" choice:"High" description:"The priority of the queue item."`
 	Reference          string `short:"r" long:"reference" required:"true" description:"The reference identfier to assign to the queue item. Note: Some queues are configured to use unique reference ids"`
-	SpecificContent    string `short:"c" long:"content" description:"Additional data for the queue item.  Must be provided as a single-quoted JSON string"`
-	DueDate            string `short:"d" long:"deadline" description:"The date before which the queue item should be processed. Must be provided as a JSON datetime in the format YYYY-MM-DDTHH:MM:SS.sssZ."`
-	Postpone           string `long:"postpone" description:"The date after which the queue item may be processed. Must be provided as a JSON datetime in the format YYYY-MM-DDTHH:MM:SS.sssZ."`
+	SpecificContent    string `short:"c" long:"content" description:"Additional data for the queue item.  Must be provided as a single-quoted JSON string. (E.g. '{\"Attribue\":\"Value\"}')"`
+	DueDate            string `short:"d" long:"deadline" description:"The UTC date before which the queue item should be processed. Must be provided as a JSON datetime in the format YYYY-MM-DDTHH:MM:SS.sssZ."`
+	Postpone           string `long:"postpone" description:"The UTC date after which the queue item may be processed. Must be provided as a JSON datetime in the format YYYY-MM-DDTHH:MM:SS.sssZ."`
 
 	Config Config
 }
@@ -154,7 +154,7 @@ func (cmd *CmdAddQueueItem) Execute(args []string) error {
 			return jsonErr
 		}
 
-		//fmt.Println(string(body))
+		cmd.Config.SetAPIVersion(respBody.Header.Get("Api-Supported-Versions"))
 
 		fmt.Println("Queue item created successfully")
 		fmt.Println("")
@@ -173,6 +173,7 @@ func (cmd *CmdAddQueueItem) Execute(args []string) error {
 		fmt.Println("Error adding queue item")
 		fmt.Println("Message: " + apiResp.Message)
 		fmt.Println("Error Code: " + strconv.Itoa(apiResp.ErrorCode))
+		fmt.Println("")
 
 	}
 

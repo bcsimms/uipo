@@ -146,6 +146,7 @@ func (cmd *CmdAuthenticate) Execute(args []string) error {
 		// Save our Access Token (Bearer token) to cache in the config file
 		cmd.Config.SetAccessToken(oauthResp.AccessToken)
 
+
 		if cmd.Config.GetAuthorizationEndpoint() == "" {
 			cmd.Config.SetAuthorizationEndpoint(cmd.AuthorizationEndpoint)
 		}
