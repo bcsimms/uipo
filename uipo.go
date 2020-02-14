@@ -19,7 +19,7 @@ type CommandList struct {
 	Verbose       bool                      `short:"v" long:"verbose" hidden:"true" description:"Run in verbose mode.  Outputs debug level interaction details"`
 	Unsafe        bool                      `long:"unsafe" description:"Unsafe mode, disables endpoint certificate verification"`
 	Authenticate  commands.CmdAuthenticate  `command:"auth" description:"Authenticate to UiPath Orchestrator"`
-	PlatformSetup commands.CmdPlatformSetup `command:"setup" description:"Used to setup UiPath Platform default values"`
+	PlatformSetup commands.CmdPlatformSetup `command:"setup" description:"Used to configure and view UiPath Platform default values"`
 	Robots        commands.CmdRobots        `command:"robots" description:"List Robots in current tenant"`
 	Folders       commands.CmdGetFolders    `command:"folders" description:"List folders for current user"`
 	UploadPackage commands.CmdUploadPackage `command:"push" description:"Upload a new package to Orchestrator"`
