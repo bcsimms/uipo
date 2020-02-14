@@ -22,7 +22,8 @@ type CommandList struct {
 	PlatformSetup commands.CmdPlatformSetup `command:"platform-setup" description:"Used to setup UiPath Platform default values"`
 	Robots        commands.CmdRobots        `command:"robots" description:"List Robots in current tenant"`
 	Folders       commands.CmdGetFolders    `command:"folders" description:"List folders for current user"`
-	UploadPackage commands.CmdUploadPackage `command:"uploadpackage" description:"Upload a new package to Orchestrator"`
+	UploadPackage commands.CmdUploadPackage `command:"push" description:"Upload a new package to Orchestrator"`
+	AddQueueItem  commands.CmdAddQueueItem  `command:"addq" description:"Add an item to a queue"`
 }
 
 var cmds CommandList
@@ -41,11 +42,6 @@ func main() {
 	cmdLineArgs := os.Args[1:]
 
 	parser.ParseArgs(cmdLineArgs)
-
-	//if err != nil {
-	//	fmt.Println("Error processing command: ", err)
-	//	os.Exit(1)
-	//}
 
 	os.Exit(0)
 
