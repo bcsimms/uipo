@@ -18,11 +18,12 @@ import (
 type CommandList struct {
 	Verbose       bool                      `short:"v" long:"verbose" hidden:"true" description:"Run in verbose mode.  Outputs debug level interaction details"`
 	Unsafe        bool                      `long:"unsafe" description:"Unsafe mode, disables endpoint certificate verification"`
-	Authenticate  commands.CmdAuthenticate  `command:"authenticate" description:"Authenticate to UiPath Orchestrator"`
-	PlatformSetup commands.CmdPlatformSetup `command:"platform-setup" description:"Used to setup UiPath Platform default values"`
+	Authenticate  commands.CmdAuthenticate  `command:"auth" description:"Authenticate to UiPath Orchestrator"`
+	PlatformSetup commands.CmdPlatformSetup `command:"setup" description:"Used to configure and view UiPath Platform default values"`
 	Robots        commands.CmdRobots        `command:"robots" description:"List Robots in current tenant"`
 	Folders       commands.CmdGetFolders    `command:"folders" description:"List folders for current user"`
-	UploadPackage commands.CmdUploadPackage `command:"uploadpackage" description:"Upload a new package to Orchestrator"`
+	UploadPackage commands.CmdUploadPackage `command:"push" description:"Upload a new package to Orchestrator"`
+	AddQueueItem  commands.CmdAddQueueItem  `command:"addq" description:"Add an item to a queue"`
 }
 
 var cmds CommandList
@@ -41,11 +42,6 @@ func main() {
 	cmdLineArgs := os.Args[1:]
 
 	parser.ParseArgs(cmdLineArgs)
-
-	//if err != nil {
-	//	fmt.Println("Error processing command: ", err)
-	//	os.Exit(1)
-	//}
 
 	os.Exit(0)
 

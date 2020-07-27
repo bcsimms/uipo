@@ -6,6 +6,7 @@ import (
 
 //Config is the interface that wraps the Config Struct and is used
 type Config interface {
+	GetConfigVersion() string
 	GetAccessToken() string
 	GetAPIVersion() string
 	GetAPIEndpoint() string

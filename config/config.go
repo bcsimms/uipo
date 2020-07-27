@@ -1,5 +1,7 @@
 package config
 
+import "strconv"
+
 //Config is the main configuration object used throughout the UIPO CLI
 type Config struct {
 	// ConfigFile stores the configuration from the .uipo/config
@@ -73,6 +75,9 @@ type globalFlgs struct {
 	Verbose bool
 }
 
+func (config *Config) GetConfigVersion() string {
+	return strconv.Itoa(config.ConfigFile.ConfigVersion)
+}
 func (config *Config) GetAccessToken() string {
 	return config.ConfigFile.AccessToken
 }

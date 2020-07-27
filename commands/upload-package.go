@@ -15,6 +15,8 @@ import (
 	"github.com/bcsimms/uipo/util"
 )
 
+const upEndPointURI string = "/odata/Processes/UiPath.Server.Configuration.OData.UploadPackage"
+
 // CmdUploadPackage represents the flags this command support
 type CmdUploadPackage struct {
 	APIEndpoint        string `short:"e" long:"api-endpoint" description:"API endpoint (e.g. https://api.example.com)"`
@@ -98,9 +100,9 @@ func (cmd *CmdUploadPackage) Execute(args []string) error {
 	var endpoint string
 
 	if cmd.Config.GetEndpointType() == config.EndpointTypeHosted {
-		endpoint = cmd.APIEndpoint + "/" + cmd.Config.GetAccountLogicalName() + "/" + cmd.Config.GetServiceLogicalName() + "/odata/Processes/UiPath.Server.Configuration.OData.UploadPackage"
+		endpoint = cmd.APIEndpoint + "/" + cmd.Config.GetAccountLogicalName() + "/" + cmd.Config.GetServiceLogicalName() + upEndPointURI
 	} else if cmd.Config.GetEndpointType() == config.EndpointTypeOnPremise {
-		endpoint = cmd.APIEndpoint + "/odata/Processes/UiPath.Server.Configuration.OData.UploadPackage"
+		endpoint = cmd.APIEndpoint + upEndPointURI
 	} else {
 		return errors.New("Invalid Endpoint Type in cached config.  Reauthenticate to reset")
 	}

@@ -3,9 +3,9 @@ BUILD_VERSION ?= $$(cat BUILD_VERSION)
 UNAME_S := $(shell uname -s)
 STATIC_BINARY =-a -tags netgo -installsuffix netgo
 LD_FLAGS_COMMON=-w -s \
-	-X github.com/ekaju-of-co/uipo/version.binaryBuildDate=$(BUILD_DATE)
+	-X github.com/bcsimms/uipo/version.binaryBuildDate=$(BUILD_DATE)
 LD_FLAGS =$(LD_FLAGS_COMMON) \
-	-X github.com/ekaju-of-co/uipo/version.binaryVersion=$(BUILD_VERSION)
+	-X github.com/bcsimms/uipo/version.binaryVersion=$(BUILD_VERSION)
 
 GOSRC = $(shell find . -name "*.go" ! -name "*test.go" ! -name "*fake*" ! -path "./integration/*")
 
