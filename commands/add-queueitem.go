@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strconv"
 	"strings"
@@ -141,11 +141,11 @@ func (cmd *CmdAddQueueItem) Execute(args []string) error {
 		return err
 	}
 
-	body, readErr := ioutil.ReadAll(respBody.Body)
+	defer respBody.Body.Close()
+	body, readErr := io.ReadAll(respBody.Body)
 	if readErr != nil {
 		return readErr
 	}
-	defer respBody.Body.Close()
 
 	if respBody.StatusCode < 300 {
 		apiResp := responseBody{}

@@ -10,7 +10,7 @@ type CmdPlatformSetup struct {
 	View                 bool   `short:"v" long:"view" description:"Displays the current setup (contents of the .uipo config file)"`
 	APIEndpoint          string `short:"e" long:"api-endpoint" description:"API endpoint (e.g. https://api.example.com)"`
 	AuthticationEndpoint string `short:"u" long:"auth-endpoint" description:"Endpoint used to generate a new bearer token"`
-	RefreshToken         string `short:"r" long:"refreh-token" description:"Refresh Token - Used for UiPath Platform Installations"`
+	RefreshToken         string `short:"r" long:"refresh-token" description:"Refresh Token - Used for UiPath Platform Installations"`
 	AccountLogicalName   string `short:"a" long:"alname" description:"Account Logical Name - Used for UiPath Platform Installations"`
 	ServiceLogicalName   string `short:"s" long:"slname" description:"Service Logical Name - Used for UiPath Platform Installations"`
 	ClientID             string `short:"c" long:"client-id" default:"5v7PmPJL6FOGu6RB8I1Y4adLBhIwovQN" descritpion:"Client ID - Used for UiPath Platform Installations.  Should not need to be overridden"`

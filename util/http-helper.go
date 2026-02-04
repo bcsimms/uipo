@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 )
 
@@ -20,15 +20,15 @@ func HTTPHelper(client http.Client, req *http.Request) ([]byte, error) {
 
 	if err != nil {
 		fmt.Println("Error communicating with the API endpoint")
-		fmt.Println(err.Error)
+		fmt.Println(err.Error())
 		return nil, err
 	}
 
-	body, readErr := ioutil.ReadAll(resp.Body)
+	defer resp.Body.Close()
+	body, readErr := io.ReadAll(resp.Body)
 	if readErr != nil {
 		return nil, readErr
 	}
-	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
 		fmt.Println("\nAPI Request Failed.  Here's the response:")
