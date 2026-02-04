@@ -47,7 +47,7 @@ type Tenant struct {
 // Folder is the representation of a Folder in UiPath Orchestrator
 type Folder struct {
 	DisplayName        string `json:"DisplayName"`
-	FullyQualifiedName string `json:"FullyQualifiedName":`
+	FullyQualifiedName string `json:"FullyQualifiedName"`
 	Description        string `json:"Description"`
 	ParentID           int    `json:"ParentId"`
 	ID                 int    `json:"Id"`

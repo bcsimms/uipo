@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 	"time"
@@ -29,7 +29,7 @@ type CmdAuthenticate struct {
 	Tenant                string `short:"t" long:"tenant" description:"Tenant"`
 	UserID                string `short:"u" long:"userid" description:"UserID - Used for on-premise installations"`
 	Password              string `short:"p" long:"password" description:"Password - Used for on-premise installations"`
-	RefreshToken          string `short:"r" long:"refreh-token" description:"Refresh Token - Used for UiPath Platform Installations"`
+	RefreshToken          string `short:"r" long:"refresh-token" description:"Refresh Token - Used for UiPath Platform Installations"`
 	ClientID              string `short:"c" long:"client-id" default:"5v7PmPJL6FOGu6RB8I1Y4adLBhIwovQN" descritpion:"Client ID - Used for UiPath Platform Installations.  Should not need to be overridden"`
 
 	Config Config
@@ -127,13 +127,13 @@ func (cmd *CmdAuthenticate) Execute(args []string) error {
 			return err
 		}
 
+		defer resp.Body.Close()
 		util.LogDebug("Reading response body")
-		body, readErr := ioutil.ReadAll(resp.Body)
+		body, readErr := io.ReadAll(resp.Body)
 		util.LogDebug("Response was: \n" + string(body))
 		if readErr != nil {
 			return readErr
 		}
-		defer resp.Body.Close()
 
 		oauthResp := responseHosted{}
 
@@ -181,13 +181,13 @@ func (cmd *CmdAuthenticate) Execute(args []string) error {
 			return err
 		}
 
+		defer resp.Body.Close()
 		util.LogDebug("Reading response body")
-		body, readErr := ioutil.ReadAll(resp.Body)
+		body, readErr := io.ReadAll(resp.Body)
 		util.LogDebug("Response was: \n" + string(body))
 		if readErr != nil {
 			return readErr
 		}
-		defer resp.Body.Close()
 
 		//fmt.Println(string(body))
 		oauthResp := responseOnPrem{}

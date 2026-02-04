@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strconv"
 
@@ -60,7 +60,7 @@ func (cmd *CmdRobots) Execute(args []string) error {
 	} else if cmd.Config.GetEndpointType() == config.EndpointTypeOnPremise {
 		robotsEndpoint = cmd.APIEndpoint + "/odata/Robots"
 	} else {
-		errors.New("Invalid Endpoint Type in cached config.  Reauthenticate to reset")
+		return errors.New("Invalid Endpoint Type in cached config.  Reauthenticate to reset")
 	}
 
 	client := http.Client{}
@@ -79,11 +79,11 @@ func (cmd *CmdRobots) Execute(args []string) error {
 	//fmt.Println(resp.Header)
 	cmd.Config.SetAPIVersion(resp.Header.Get("Api-Supported-Versions"))
 
-	body, readErr := ioutil.ReadAll(resp.Body)
+	defer resp.Body.Close()
+	body, readErr := io.ReadAll(resp.Body)
 	if readErr != nil {
 		return readErr
 	}
-	defer resp.Body.Close()
 
 	//fmt.Println(string(body))
 
