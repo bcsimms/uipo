@@ -20,7 +20,7 @@ func HTTPHelper(client http.Client, req *http.Request) ([]byte, error) {
 
 	if err != nil {
 		fmt.Println("Error communicating with the API endpoint")
-		fmt.Println(err.Error)
+		fmt.Println(err)
 		return nil, err
 	}
 

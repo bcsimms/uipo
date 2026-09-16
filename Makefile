@@ -1,11 +1,11 @@
 BUILD_DATE ?= $$(date -u +"%Y-%m-%d")
 BUILD_VERSION ?= $$(cat BUILD_VERSION)
-UNAME_S := $(shell uname -s)
 STATIC_BINARY =-a -tags netgo -installsuffix netgo
 LD_FLAGS_COMMON=-w -s \
 	-X github.com/bcsimms/uipo/version.binaryBuildDate=$(BUILD_DATE)
 LD_FLAGS =$(LD_FLAGS_COMMON) \
 	-X github.com/bcsimms/uipo/version.binaryVersion=$(BUILD_VERSION)
+LD_FLAGS_LINUX =$(LD_FLAGS)
 
 GOSRC = $(shell find . -name "*.go" ! -name "*test.go" ! -name "*fake*" ! -path "./integration/*")
 
@@ -17,11 +17,10 @@ build: uipo
 clean: ## Remove all files from the `out` directory
 	rm -f $(wildcard out/uipo*)
 
-# Build dynamic binary for Darwin
-ifeq ($(UNAME_S),Darwin)
+# Native binary for the current platform
 uipo: $(GOSRC)
+	mkdir -p out
 	go build -ldflags "$(LD_FLAGS)" -o out/uipo
-endif
 
 win32.exe: $(GOSRC)
 	GOARCH=386 GOOS=windows go build -tags="forceposix" -o out/uipo-win32.exe -ldflags "$(LD_FLAGS)" .
